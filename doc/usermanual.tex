@@ -1,0 +1,21 @@
+
+\documentclass{article}
+
+%\usepackage{graphicx, amssymb}
+
+\begin{document}
+
+%\title{...} 
+%\author{...} 
+%\thanks{...} 
+%\date{...} 
+%\maketitle
+
+
+%\begin{abstract} 
+%\end{abstract}
+
+
+
+\section{Introduction}
+MCSED allows the user to match observational data to model Spectral Energy Distributions (SEDs), thereby retrieving the physical parameters of the models such as stellar mass, metallically, dust mass, and more.  The code uses Charlie Conroy's Flexible Stellar Population Synthesis Fortran 90 code to generate model SEDs and a Markov Chain Monte Carlo Python simulator called emcee to explore the likelihood of matches to input data.  For ease of use, Python FSPS is used to wrap FSPS, requiring the user to only modify simple python scripts. 

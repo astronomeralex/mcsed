@@ -1,0 +1,42 @@
+VERSION NOTES:
+- 1.4c:
+	All bands have central wavelength below 1250 Angstrom rest frame
+	are set to zero flux.  This only considers the central wavelength
+	of the bands and does not account for the fact that the transmission
+	curve for a band extends over a finite width in wavelength, e.g.
+	the lower wavelength parts of some bands may consider emission 
+	below 1250 rest frame.
+
+	Unrelated, but also added a check in the outputs folder to see if 
+	an outputN.npz exists for that N.  Allows code to be run twice
+	if the first run didn't get through all objects before LionXG said
+	time was up.
+	
+	
+- 1.3c:
+	Eb (uvb) can now be negative. required changing the FSPS code by 
+	commenting out some lines in the beginning of add_dust.f90 that 
+	didn't allow for negative uvb. It now ranges from [-2,5]
+	
+- 1.2c:
+	added superIndexes: a smart way to split up the rows of outputFluxes 
+	that do not have all 0's.  Each of the N main.py's running takes an 
+	equal number of these.
+
+- 1.1c:
+	moved the function that handles errors to math_functions.py.  main.py
+	now simply calls this function.  this function has also been updated
+	to, for each given band, allow the error to be the max of err_floor,
+	the actual error for the band, and the half the contribution of OIII, 
+	H_beta, OII, and, H_alpha, if a line falls in that band.  also, removed
+	the requirement at an object needs at least two observations to do a 
+	random walk because added the requirement that there is at least 3
+	observations less than 10000, two between 10000 and 25000 and one over
+	30000 (observed frame)
+
+- 1.0c:
+    because sfh = 1 doesnt interpolate properly between Conroy's tage points,
+    a work around has been implimented into emcee_functions.lnprob().  It gets
+    the SEDs of the nearest two tage points and creates its own interpolation
+    function between them.  This will increase run time by atleast 2x because
+    two SEDs are created per lnprob() call versus the previous amount of one.
